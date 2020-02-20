@@ -24,9 +24,9 @@ async function Api() {
          return result.map(info => ({
             track_name: info.track.name,
             artist: info.track.artist.name,
-            album: info.track.album ? info.track.album.title : "Now 34",
-            tag: info.track.toptags.tag[0] ? info.track.toptags.tag[0].name : "pop",
-            year: info.track.wiki ? new Date(info.track.wiki.published).getFullYear() : "2018",
+            album: info.track.album ? info.track.album.title : "-",
+            tag: info.track.toptags.tag[0] ? info.track.toptags.tag[0].name : "-",
+            year: info.track.wiki ? new Date(info.track.wiki.published).getFullYear() : "-",
         }));
     });
     return resultArr;

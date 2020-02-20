@@ -1,37 +1,46 @@
 import React from 'react';
-import Api from './api'
+import Spin from './spinner'
+import Table from 'react-bootstrap/Table'
 
+import { connect } from 'react-redux';
+import { actions } from './dataActions';
 class Page extends React.Component {
   constructor() {
     super();
-    this.state = { data: null };
-    this.GetData = this.GetData.bind(this);
   }
 
   componentDidMount() {
-    console.log("componentDidMount START");
-    this.GetData();
-    console.log("componentDidMount END");
-  }
-
-  async GetData() {
-    console.log("GetData START");
-    const data = await Api();
-    this.setState({
-      data: data
-    });
-    console.log("GetData END");
+    this.props.getData();
   }
 
   render() {
-    if (this.state.data) {
-      return <div>MyPage</div>;
+    if (this.props.data) {
+      return (
+        <Table striped bordered hover>
+        <thead>
+          <tr>
+            <th>Singer</th>
+            <th>Song</th>
+            <th>Ganre</th>
+            <th>Year</th>
+          </tr>
+        </thead>
+      </Table>)
     } else {
-      return null;
+      return <Spin />;
     }
-    //console.log("RENDER", this.state.data);
   }
 }
 
+const mapStateToProps = state => ({
+  data: state.data,
+});
 
-export default Page;
+const mapDispatchToProps = dispatch => ({
+  getData: () => dispatch(actions.getData()),
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(Page);
