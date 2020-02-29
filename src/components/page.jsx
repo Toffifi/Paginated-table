@@ -21,10 +21,23 @@ class Page extends React.Component {
           <tr>
             <th>Singer</th>
             <th>Song</th>
+            <th>Album</th>
             <th>Ganre</th>
             <th>Year</th>
           </tr>
         </thead>
+        <tbody>
+        {this.props.data.map((e) => {
+          return(
+          <tr>
+            <td>{e.artist}</td>
+            <td>{e.track_name}</td>
+            <td>{e.album}</td>
+            <td>{e.tag}</td>
+            <td>{e.year}</td>
+          </tr>
+        )})}
+        </tbody>
       </Table>)
     } else {
       return <Spin />;
